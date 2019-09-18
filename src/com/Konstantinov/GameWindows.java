@@ -3,9 +3,15 @@ package com.Konstantinov;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.*;
+import java.util.ArrayList;
 
 
 public class GameWindows extends JFrame {
@@ -28,8 +34,17 @@ public class GameWindows extends JFrame {
     private static double mousecordX = 0;
     private static double mousecordY = 0;
 
+    private static Entry nameEntry;
+    private static Database db;
+
+    private static boolean isReported = false;
+    public static boolean drawRecords = false;
+    private static ArrayList<String> recordList = new ArrayList<String>();
+
 
     public static void main(String[] args) throws IOException {
+        db = new Database("jdbc:mysql://localhost/gamedrop?useLegacyDatetimeCode=false&serverTimezone=Europe/Helsinki");
+        db.init();
         background= ImageIO.read(GameWindows.class.getResourceAsStream("background.png"));
         drop= ImageIO.read(GameWindows.class.getResourceAsStream("drop.png")).getScaledInstance((int) drop_width, (int) drop_height, Image.SCALE_DEFAULT);
         gameover= ImageIO.read(GameWindows.class.getResourceAsStream("gameover.png")).getScaledInstance(300,200, Image.SCALE_DEFAULT);
@@ -116,12 +131,39 @@ public class GameWindows extends JFrame {
 
                             drop_width= 100;
                             drop_height= 152;
+                            isRecorded = false;
+
                         }
                     }
                 }
                 }
 
         });
+        nameEntry = new Entry();
+        game_windows.addKeyListener(new KeyAdapter()
+        {
+            @Override
+            public void  keyTyped(KeyEvent e){
+
+            }
+            @Override
+            public void  keyPressed(KeyEvent e){
+                nameEntry.keyPress(e);
+                if (nameEntry.isActive && !isReported){
+                    if(e.getKeyCode() == KeyEvent.VK_ENTER){
+                        db.addRecord(nameEntry.text, score);
+
+                        isRecorded = true;
+
+                    }
+                }
+            }
+            @Override
+            public void  keyReleased(KeyEvent e){
+
+            }
+        }
+
 
         game_windows.add(game_field);
         game_windows.setVisible(true);
@@ -161,7 +203,7 @@ public class GameWindows extends JFrame {
             if(direction == -1) direction = 1;
             else direction=-1;
         }
-
+        nameEntry.update(g);
         /*
         g.drawImage(kaplya,0,0,null);
         g.drawImage(gameover,0,0,null);*/
