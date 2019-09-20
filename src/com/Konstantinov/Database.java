@@ -8,13 +8,16 @@ import java.util.ArrayList;
 
 public class Database {
     public String host,user,password;
+    private Connection connection;
+    private Object Connection;
+
     public Database(String host, String user, String password)
     {
         this.host = host;
         this.user = user;
         this.password = password;
     }
-    public void Database(String name,int score)
+    public void addRecord(String name,int score)
     {
         try {
             String sql = String.format("INSERT INTO player(Name,Score) VALUES('%s,%d')", name, score);
@@ -26,7 +29,7 @@ public class Database {
             e.printStackTrace();
         }
     }
-    public ArrayList<String> getRecords(){
+    public void getRecords(){
         ArrayList<String> result = new ArrayList<String>();
         try{
             Statement st = connection.createStatement();
@@ -41,6 +44,7 @@ public class Database {
         }
         catch (Exception e){}
     }
+    
     public void init() {
         try{
             Class.forName("com.mysql.cj.jdbc.Driver").getDeclaredConstructor().newInstance();
@@ -54,4 +58,5 @@ public class Database {
             System.out.println(ex);
         }
     }
+
 }

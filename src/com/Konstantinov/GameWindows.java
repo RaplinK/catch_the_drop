@@ -31,19 +31,19 @@ public class GameWindows extends JFrame {
     private static float drop_height= 152;
     private static boolean pause = false;
     private static  float drop_speed_save ;
-    private static double mousecordX = 0;
-    private static double mousecordY = 0;
+    private static double mouserecordX = 0;
+    private static double mouserecordY = 0;
 
     private static Entry nameEntry;
     private static Database db;
 
-    private static boolean isReported = false;
+    private static boolean isRecorded = false;
     public static boolean drawRecords = false;
     private static ArrayList<String> recordList = new ArrayList<String>();
 
 
     public static void main(String[] args) throws IOException {
-        db = new Database("jdbc:mysql://localhost/gamedrop?useLegacyDatetimeCode=false&serverTimezone=Europe/Helsinki");
+        db = new Database("jdbc:mysql://localhost/gamedrop?useLegacyDatetimeCode=false&serverTimezone=Europe/Helsinki","root","");
         db.init();
         background= ImageIO.read(GameWindows.class.getResourceAsStream("background.png"));
         drop= ImageIO.read(GameWindows.class.getResourceAsStream("drop.png")).getScaledInstance((int) drop_width, (int) drop_height, Image.SCALE_DEFAULT);
@@ -75,13 +75,13 @@ public class GameWindows extends JFrame {
                     else {
                         drop_speed_save = drop_v;
                         drop_v=0;
-                        mousecordX = MouseInfo.getPointerInfo().getLocation().getX();
-                        mousecordY = MouseInfo.getPointerInfo().getLocation().getY();
+                        mouserecordX = MouseInfo.getPointerInfo().getLocation().getX();
+                        mouserecordY = MouseInfo.getPointerInfo().getLocation().getY();
                         pause = true;
                     }
                     try{
                         Robot r = new Robot();
-                        r.mouseMove((int)mousecordX,(int)mousecordY);
+                        r.mouseMove((int)mouserecordX,(int)mouserecordY);
                     }
                     catch (AWTException ee){
 
@@ -149,7 +149,7 @@ public class GameWindows extends JFrame {
             @Override
             public void  keyPressed(KeyEvent e){
                 nameEntry.keyPress(e);
-                if (nameEntry.isActive && !isReported){
+                if (nameEntry.isActive && !isRecorded){
                     if(e.getKeyCode() == KeyEvent.VK_ENTER){
                         db.addRecord(nameEntry.text, score);
 
@@ -162,7 +162,8 @@ public class GameWindows extends JFrame {
             public void  keyReleased(KeyEvent e){
 
             }
-        }
+        });
+
 
 
         game_windows.add(game_field);

@@ -2,14 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="70437dbd-0c9d-4191-929c-48880ec3d1e8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/Konstantinov/Database.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/Konstantinov/Entry.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/opilane.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/catch_the_drop/com/Konstantinov/GameWindows$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/catch_the_drop/com/Konstantinov/GameWindows$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/catch_the_drop/com/Konstantinov/GameWindows$GameField.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/catch_the_drop/com/Konstantinov/GameWindows.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/Konstantinov/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Konstantinov/Database.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/Konstantinov/GameWindows.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Konstantinov/GameWindows.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
